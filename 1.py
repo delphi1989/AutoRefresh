@@ -2,19 +2,16 @@
 import os
 import requests as req
 import json,sys,time
-#先注册azure应用,确保应用有以下权限:
-#files:	Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All
-#user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
-#mail:  Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
-#注册后一定要再点代表xxx授予管理员同意,否则outlook api无法调用
 
 id = os.environ["CONFIG_ID"]
 secret = os.environ["CONFIG_KEY"]
 
 """
-存取 gist
+1. 存取 gist
+透過 workflow 將 gist 下載至虛擬機上
+filepath 為檔案路徑
 """
-print(os.getcwd())
+
 filepath = os.getcwd() + '/' + os.environ["GIST_ID"] + '/' + os.environ["GIST_TEXT"]
 
 path=sys.path[0]+r'/1.txt'

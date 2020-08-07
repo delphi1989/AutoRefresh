@@ -28,19 +28,25 @@ jobs:
     - name: Install requests #安装requests
       run: |
         pip install requests
+    - name: Pull gist
+      env:
+        GIST_HTTPS: ${{ secrets.GIST_HTTPS_WITH_TOKEN }}
+      run: git clone $GIST_HTTPS
     - name: Test Api #Api调用
-      env: 
+      env:
         CONFIG_ID: ${{ secrets.CONFIG_ID }} # secrets_id 提供
         CONFIG_KEY: ${{ secrets.CONFIG_KEY }} # secrets_key 提供
-      run: | 
+        GIST_ID: ${{ secrets.GIST_ID }}
+        GIST_TEXT: ${{ secrets.GIST_TEXT }}
+      run: |
         python 1.py
-    - name: Commit #上传新的refresh_token到仓库
+    - name: Push Gist #上传新的refresh_token到仓库
+      env:
+        GIST_ID: ${{ secrets.GIST_ID }}
       run: |
         git config --global user.email AutoupdateRobot@email.com
         git config --global user.name AutoupdateRobot
+        cd $GIST_ID
         git add .
-        git commit -m "update new refresh_token" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        git commit -m '更新 token'
+        git push origin master

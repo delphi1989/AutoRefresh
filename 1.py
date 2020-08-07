@@ -14,7 +14,7 @@ secret = os.environ["CONFIG_KEY"]
 """
 存取 gist
 """
-filepath = Path.cwd() / os.environ["GIST_ID"] / os.environ["GIST_TEXT"]
+filepath = os.getcwd() / os.environ["GIST_ID"] / os.environ["GIST_TEXT"]
 
 path=sys.path[0]+r'/1.txt'
 num1 = 0

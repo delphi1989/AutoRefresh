@@ -49,4 +49,5 @@ jobs:
         cd $GIST_ID
         git add .
         git commit -m '更新 token'
+        git remote -v
         git push origin master

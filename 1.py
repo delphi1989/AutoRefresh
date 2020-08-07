@@ -11,6 +11,10 @@ import json,sys,time
 id = os.environ["CONFIG_ID"]
 secret = os.environ["CONFIG_KEY"]
 
+"""
+存取 gist
+"""
+filepath = Path.cwd() / os.environ["GIST_ID"] / os.environ["GIST_TEXT"]
 
 path=sys.path[0]+r'/1.txt'
 num1 = 0
@@ -22,15 +26,25 @@ def gettoken(refresh_token):
           'client_id':id,
           'client_secret':secret,
           'redirect_uri':'http://localhost:8000/signin-oidc'}
+    """
+    更新 refresh token, 順便取得 access token
+    """
     html = req.post('https://login.microsoftonline.com/common/oauth2/v2.0/token',data=data,headers=headers)
     jsontxt = json.loads(html.text)
     refresh_token = jsontxt['refresh_token']
     access_token = jsontxt['access_token']
-    with open(path, 'w+') as f:
+    """
+    把 refresh token 寫到 gist 檔案
+    """
+    with open(filepath, 'w+') as f:
         f.write(refresh_token)
     return access_token
+
 def main():
-    fo = open(path, "r+")
+    """
+    讀取 refresh token
+    """
+    fo = open(filepath, "r+")
     refresh_token = fo.read()
     fo.close()
     global num1

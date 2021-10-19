@@ -4,6 +4,7 @@ Test. Add another feature
 Test. UAT fix bug 2
 Test. Add third feature
 Test. UAT hotfix
+Test. Master hotfix
 
 
 # AutoApiSecret-加密版

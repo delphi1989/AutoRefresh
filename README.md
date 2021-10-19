@@ -5,6 +5,7 @@ Test. UAT fix bug 2
 Test. Add third feature
 Test. UAT hotfix
 Test. Master hotfix
+Test. Add fourth feature
 
 # AutoApiSecret-加密版
 AutoApi系列：AutoApi、AutoApiSecret、AutoApiSR、AutoApiS
